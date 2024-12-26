@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero(){
     return(
-        <main className="w-full h-full md:h-[500px] flex flex-col md:flex-row justify-between items-start bg-[#F2F0F1]">
+        <main className=" max-w-screen-2xl mx-auto w-full h-full md:h-[500px] flex flex-col md:flex-row justify-between items-start bg-[#F2F0F1]">
          {/* left */}
          <div className="w-full md:w-[500px] mt-3 md:mt-10 md:ml-10 pl-3">
             <h1 className="text-2xl md:text-5xl font-extrabold ">FIND CLOTHES THAT MATCHES YOUR STYLE</h1>

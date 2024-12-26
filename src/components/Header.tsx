@@ -7,7 +7,7 @@ import { NavigationMenuDemo } from "./NavigationMenu";
 
 export default function Header() {
   return (
-     <header className="w-full h-[60px] bg-white flex justify-between items-center">
+     <header className="w-full h-[60px] bg-white flex justify-between items-center  max-w-screen-2xl mx-auto">
           {/* left */}
             <div className="flex justify-center items-center">
                 <SheetSide/>
@@ -19,9 +19,9 @@ export default function Header() {
                 
                      
                     <Link href={""}> <NavigationMenuDemo/></Link>
-                    <Link href={""}>On Sale</Link>
-                    <Link href={""}>New Arrivals</Link>
-                    <Link href={""}>Brands</Link>
+                    <Link href={"/"}>On Sale</Link>
+                    <Link href={"/products"}>New Arrivals</Link>
+                    <Link href={"/"}>Brands</Link>
                 </li>
             </ul>
             {/* search input */}
@@ -35,7 +35,9 @@ export default function Header() {
             {/* cart */}
               <div className="flex items-center mr-7 space-x-5">
               <FaSearchengin className="text-xl ml-2 md:hidden"/>
-              <FaCartShopping className="texl-2xl"/>
+             <Link href={"/cart"}>
+             <FaCartShopping className="texl-2xl"/>
+             </Link>
               <FaCartShopping className="texl-2xl"/>
               </div>
 

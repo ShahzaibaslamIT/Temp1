@@ -4,7 +4,19 @@ import { FaStar } from "react-icons/fa";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Check, Minus, Plus } from "lucide-react";
-let star = [<FaStar/>,<FaStar/>,<FaStar/>,<FaStar/>,<FaStar/>]
+import AllReviw from "@/components/allreviws";
+import Products from "../page";
+import Tshirts from "@/components/products";
+import { BreadcrumbDemo } from "@/components/Bredcrupm";
+
+// Adding key prop in star array
+let star = [
+  <FaStar key={1} />,
+  <FaStar key={2} />,
+  <FaStar key={3} />,
+  <FaStar key={4} />,
+  <FaStar key={5} />,
+];
 
 interface Iproducts{
     title:string,
@@ -20,13 +32,13 @@ interface Iproducts{
 
 let product:Iproducts[] = [
     {
-     title:"T-SHIRT WITH TAPE DETAILS",
-     id:1,
-     price:"$120",
-     img_url:"/product1.png",
+      title:"T-SHIRT WITH TAPE DETAILS",
+      id:1,
+      price:"$140",
+      img_url:"/product1.png",
      img1:"/detail1.png",
       img2:"/detail2.png",
-     img3:"/detail3.png",
+     img3:"/product1.png",
     
     },
     {
@@ -35,9 +47,9 @@ let product:Iproducts[] = [
      price:"$120",
      img_url:"/product2.png",
      old_price:"$200",
-     img1:"/detail1.png",
+     img1:"/product2.png",
      img2:"/detail2.png",
-     img3:"/detail3.png",
+     img3:"/product2.png",
     
     },
     {
@@ -47,7 +59,7 @@ let product:Iproducts[] = [
      img_url:"/product3.png",
      img1:"/detail1.png",
      img2:"/detail2.png",
-     img3:"/detail3.png",
+     img3:"/product3.png",
     
     },
     {
@@ -58,10 +70,21 @@ let product:Iproducts[] = [
      old_price:"$200",
      img1:"/detail1.png",
      img2:"/detail2.png",
-     img3:"/detail3.png",
-    
-
-    }
+     img3:"/product4.png",
+  
+    },
+    {
+      title:"SLEEVE STRIPED T-SHIRT",
+      id:5,
+      price:"$120",
+      img_url:"/sell1.png",
+      old_price:"$200",
+      img1:"/detail1.png",
+      img2:"/detail2.png",
+      img3:"/sell1.png",
+   
+     },
+     
 ]
 
 export default function Pro_Detail(){
@@ -73,7 +96,9 @@ export default function Pro_Detail(){
     }
 
     return(
-        <div className="flex flex-col md:flex-row justify-center sm:justify-evenly sm:mt-10 p-5 sm:p-0">
+      <>
+        <BreadcrumbDemo/>
+        <div className="flex flex-col md:flex-row justify-center sm:justify-evenly sm:mt-10 p-5 sm:p-0  max-w-screen-2xl mx-auto">
             {/* left */}
               <div className=" flex sm:flex-col  justify-between items-center w-full sm:w-[152px] order-2 sm:order-1">
                 {/* images */}
@@ -89,8 +114,10 @@ export default function Pro_Detail(){
                <div className=" w-full sm:w-[600px] h-[500px] mt-3 order-3">
                    <h1 className="text-2xl md:text-3xl font-bold">One Life Graphic T-shirt</h1>
                    <div className="flex text-yellow-400">
-                      {star}
-                   </div>
+                                    {star.map((icon, index) => (
+                                        <span key={index}>{icon}</span>
+                                    ))}
+                                </div>
                    <p className="font-bold mt-1">{item.price} <span>{item.old_price}</span> </p>
                    <p>This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.</p>
                    {/* select color */}
@@ -122,9 +149,9 @@ export default function Pro_Detail(){
                    <Button className="bg-black text-white w-[300px]">Add to Cart</Button>
                </div>
                </div>
-              
-              
-
         </div>
+         <AllReviw/>
+         <Tshirts/>
+        </>
     )
 }

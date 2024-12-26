@@ -18,8 +18,8 @@ import {
 const components: { title: string; href: string; description: string }[] = [
 
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
+    title: "Casual",
+    href: "/casual",
     description:
       "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
   },
@@ -53,14 +53,16 @@ export function NavigationMenuDemo() {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[300px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {components.map((component) => (
-                <ListItem
+              {components.map((component,index) => (
+               <Link href={"/casual"} key={index}>
+                 <ListItem
                   key={component.title}
                   title={component.title}
-                  href={component.href}
+                  href={"/casual"}
                 >
                   {component.description}
                 </ListItem>
+               </Link>
               ))}
             </ul>
           </NavigationMenuContent>
