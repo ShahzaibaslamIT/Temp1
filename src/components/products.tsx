@@ -51,7 +51,7 @@ let star = [
 export default function Tshirts(){
     return(
         <div className="w-full h-full sm:h-[500px] mt-10  max-w-screen-2xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold text-center">TOP SEELING</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-center">TOP SELLING</h1>
             <div className="flex flex-col md:flex-row justify-center items-center md:justify-between px-8 mt-10">
                 {
                     product.map((data)=>{

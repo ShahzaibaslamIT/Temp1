@@ -11,7 +11,7 @@ export default function Header() {
           {/* left */}
             <div className="flex justify-center items-center">
                 <SheetSide/>
-            <h1 className="text-xl sm:text-3xl font-bold pl-2">SHOP.CO</h1>
+            <h1 className="text-xl sm:text-3xl font-bold pl-2 flex">Rakshanda's Closet</h1>
             </div>
             {/* navbav */}
             <ul className="hidden md:block">

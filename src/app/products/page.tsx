@@ -1,85 +1,99 @@
+"use client"; // Indicates client-side rendering
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation"; // Use `useParams` to access route parameters
+import { createClient } from "@sanity/client";
 import Image from "next/image";
-import Link from "next/link";
-import { FaStar } from "react-icons/fa";
 
-interface Iproducts{
-    title:string,
-    price:string,
-    id:number
-    rating?:string,
-    old_price?:string
-    img_url:string
-}
+const sanity = createClient({
+  projectId: "x40to373", // Replace with your actual project ID
+  dataset: "production",
+  apiVersion: "v2025-01-24",
+  useCdn: true,
+});
 
-let product:Iproducts[] = [
-    {
-     title:"T-SHIRT WITH TAPE DETAILS",
-     id:1,
-     price:"$140",
-     img_url:"/product1.png"
-    },
-    {
-     title:"SKINNY FIT JEANS",
-     id:2,
-     price:"$120",
-     img_url:"/product2.png",
-     old_price:"$200"
-    },
-    {
-     title:"CHECKERED SHIRT",
-     id:3,
-     price:"$120",
-     img_url:"/product3.png"
-    },
-    {
-     title:"SLEEVE STRIPED T-SHIRT",
-     id:4,
-     price:"$120",
-     img_url:"/product4.png",
-     old_price:"$200"
+const ProductDetails: React.FC = () => {
+  const { id } = useParams(); // Get the dynamic product ID from the route
+  const [product, setProduct] = useState<any>(null);
 
+  // Fetch the product details using the dynamic ID
+  const fetchProduct = async () => {
+    if (!id) return; // Ensure the ID exists before fetching
+    try {
+      const query = `
+        *[_type == "products" && _id == $id][0]{
+          _id,
+          title,
+          price,
+          description,
+          discountPercentage,
+          "imageUrl": image.asset->url,
+          tags
+        }
+      `;
+      const data = await sanity.fetch(query, { id });
+      setProduct(data);
+    } catch (error) {
+      console.error("Error fetching product details:", error);
     }
-]
+  };
 
-// Adding key prop in star array
-let star = [
-    <FaStar key={1} />,
-    <FaStar key={2} />,
-    <FaStar key={3} />,
-    <FaStar key={4} />,
-    <FaStar key={5} />,
-];
-export default function Products(){
-    return(
-        <div className="w-full h-full sm:h-[500px] mt-10">
-            <h1 className="text-3xl md:text-4xl font-bold text-center">NEW ARRIVALS</h1>
-            <div className="flex flex-col md:flex-row justify-center items-center md:justify-between px-8 mt-10">
-                {
-                    product.map((data)=>{
-                        return(
-                              <div key={data.id}>
-                                <Link href={`/products/${data.id}`}>
-                                  <div className="w-[190px] h-[190px] md:w-[290px] md:h-[290px] bg-[#F0EEED] rounded-[20px]">
-                                  <Image src={data.img_url} alt={data.title}
-                                  className="w-full h-full rounded-[20px]"
-                                 width={100} height={100}></Image>
-                                 
-                                  </div>
-                                  </Link>
-                                <div>
-                                <p className="text-lg mt-2 font-bold">{data.title}</p>
-                                <div className="flex text-yellow-400">
-                                    {star.map((icon, index) => (
-                                        <span key={index}>{icon}</span>
-                                    ))}
-                                </div>
-                                <p  className="font-bold mt-1">{data.price} <span className="text-gray-400 font-bold line-through"> {data.old_price} </span></p>
-                                </div>
-                              </div>
-                        )
-                    })
-                }
+  useEffect(() => {
+    fetchProduct();
+  }, [id]);
+
+  if (!product) {
+    return <p className="text-center mt-10 text-slate-600">Loading...</p>;
+  }
+
+  return (
+    <div className="p-6">
+      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Product Image */}
+          <div>
+            <Image
+              src={product.imageUrl}
+              alt={product.title}
+              width={500}
+              height={500}
+              className="rounded-lg object-cover"
+            />
+          </div>
+          {/* Product Details */}
+          <div>
+            <h1 className="text-2xl font-bold text-slate-800">
+              {product.title}
+            </h1>
+            <p className="text-slate-600 mt-2">{product.description}</p>
+            <div className="mt-4">
+              <p className="text-lg text-slate-800 font-semibold">
+                Price: ${product.price.toFixed(2)}
+              </p>
+              {product.discountPercentage > 0 && (
+                <p className="text-green-600">
+                  Discount: {product.discountPercentage}% OFF
+                </p>
+              )}
             </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {product.tags?.length > 0 ? (
+                product.tags.map((tag: string, index: number) => (
+                  <span
+                    key={index}
+                    className="bg-slate-200 text-black rounded-full px-2 py-1 text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))
+              ) : (
+                <p>No Tags</p>
+              )}
+            </div>
+          </div>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
+
+export default ProductDetails;

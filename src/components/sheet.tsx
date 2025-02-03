@@ -28,7 +28,7 @@ export function SheetSide() {
           </SheetTrigger>
           <SheetContent side={side}>
             <SheetHeader>
-              <SheetTitle>Shop.co</SheetTitle>
+              <SheetTitle>Rakshanda's Closet</SheetTitle>
              
             </SheetHeader>
               {/* navbav */}

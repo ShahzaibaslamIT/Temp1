@@ -66,7 +66,7 @@ export default function AllReviw(){
         <main className=" max-w-screen-2xl mx-auto">
              {/* top */}
              <div className="px-5 flex justify-between">
-             <h1 className="text-2xl">All Reviws</h1>
+             <h1 className="text-2xl mt-7">All Reviews</h1>
                <div className="space-x-3">
                <Button variant={"outline"} className="hidden md:block">Latest</Button>
                <Button>Write Now Review</Button>
