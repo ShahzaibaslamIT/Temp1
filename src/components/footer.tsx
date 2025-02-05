@@ -16,7 +16,7 @@ export default function Footer(){
           {/* top div */}
           <div className="flex flex-col justify-center items-center w-[200px]"> 
             <ul>
-                <h2 className="text-2xl sm:text-3xl font-extrabold">Rakshanda's Closet</h2>
+                <h2 className="text-2xl sm:text-3xl font-extrabold">Rakshandas Closet</h2>
                 <p className="text-sm mt-1"> We have clothes that suits your style and which you’re proud to wear. From women to men.</p>
                    {/* icon */}
                    <div className="flex items-center space-x-3 mt-1">
@@ -68,7 +68,7 @@ export default function Footer(){
         </div>
          {/* bottom div */}
          <div className="flex flex-col sm:flex-row justify-between items-center mt-3">
-                <p className="text-sm">Rakshanda's Closet © 2000-2023, All Rights Reserved</p>
+                <p className="text-sm">Rakshandas Closet © 2000-2023, All Rights Reserved</p>
                 <div className="flex items-center ">
                     <Image src={"/foot1.png"} className="w-[50px]" width={100} height={100} alt="pic"/>
                     <Image src={"/foot1.png"} className="w-[50px]" width={100} height={100} alt="pic"/>

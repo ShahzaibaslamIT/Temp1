@@ -39,7 +39,7 @@ const ProductDetails: React.FC = () => {
 
   useEffect(() => {
     fetchProduct();
-  }, [id]);
+  }, [fetchProduct]);
 
   if (!product) {
     return <p className="text-center mt-10 text-slate-600">Loading...</p>;
